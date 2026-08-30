@@ -163,13 +163,31 @@ export default function Home() {
       return;
     }
 
-    const XLSX = await import('xlsx');
-    const workbook = XLSX.utils.book_new();
-    const summarySheet = XLSX.utils.aoa_to_sheet(summaryRows);
-    const itemsSheet = XLSX.utils.json_to_sheet(invoice.lineItems);
-    XLSX.utils.book_append_sheet(workbook, summarySheet, 'Invoice');
-    XLSX.utils.book_append_sheet(workbook, itemsSheet, 'Line items');
-    XLSX.writeFile(workbook, `${stem}.xlsx`);
+    const ExcelJS = (await import('exceljs')).default;
+    const workbook = new ExcelJS.Workbook();
+    workbook.creator = 'LumenDoc';
+
+    const summarySheet = workbook.addWorksheet('Invoice');
+    summarySheet.addRows(summaryRows);
+    summarySheet.getColumn(1).width = 22;
+    summarySheet.getColumn(2).width = 32;
+    summarySheet.getRow(1).font = { bold: true };
+
+    const itemsSheet = workbook.addWorksheet('Line items');
+    itemsSheet.columns = [
+      { header: 'Description', key: 'description', width: 38 },
+      { header: 'Quantity', key: 'quantity', width: 12 },
+      { header: 'Total', key: 'total', width: 16 },
+    ];
+    itemsSheet.addRows(invoice.lineItems);
+    itemsSheet.getRow(1).font = { bold: true };
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    downloadBlob(
+      buffer as BlobPart,
+      `${stem}.xlsx`,
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
   }
 
   const foundFields = [
