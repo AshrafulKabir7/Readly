@@ -2,7 +2,7 @@
 
 ## Public demo
 
-The public LumenDoc demo is intentionally browser-only. It accepts PDF, PNG, and JPG files up to 10 MB, processes the first PDF page, uses an English OCR model, and lets the visitor review and export the result. Files are not uploaded or retained.
+The public LumenDoc demo is intentionally browser-only. It includes a complete SaaS-style marketing homepage, a clearly labeled portfolio-demo access screen, and an OCR workspace. It accepts PDF, PNG, and JPG files up to 10 MB, processes the first PDF page, uses an English OCR model, and lets the visitor review and export the result. Files and demo passwords are not uploaded or retained.
 
 ## Premium client implementation
 
