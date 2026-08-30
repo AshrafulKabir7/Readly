@@ -100,3 +100,34 @@
 ::selection {
   background: color-mix(in oklch, var(--primary) 24%, transparent);
 }
+
+@keyframes hero-scan {
+  0%, 8% { top: 18%; opacity: 0; }
+  15% { opacity: 1; }
+  78% { top: 82%; opacity: 1; }
+  88%, 100% { top: 82%; opacity: 0; }
+}
+
+@keyframes hero-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+
+.hero-scan-line {
+  animation: hero-scan 4.8s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+.hero-float-card {
+  animation: hero-float 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scan-line,
+  .hero-float-card {
+    animation: none;
+  }
+
+  .hero-scan-line {
+    top: 50%;
+  }
+}

@@ -13,7 +13,6 @@ import {
   LockKeyhole,
   LogOut,
   RotateCcw,
-  Sparkles,
   UploadCloud,
 } from 'lucide-react';
 
@@ -206,9 +205,9 @@ export default function OcrWorkspace() {
   ].filter(Boolean).length;
 
   return (
-    <main className="min-h-screen bg-[#f6f7f8] text-foreground">
-      <header className="sticky top-0 z-40 border-b border-black/[0.07] bg-white/92 backdrop-blur-xl">
-        <div className="mx-auto flex h-[68px] max-w-[1480px] items-center justify-between px-5 lg:px-8">
+    <main className="min-h-screen bg-[#f4f4f2] text-foreground">
+      <header className="sticky top-0 z-40 border-b border-black/[0.09] bg-[#fafaf9]/95 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-[1480px] items-center justify-between px-5 lg:px-8">
           <div className="flex min-w-0 items-center gap-4">
             <Link href="/" aria-label="LumenDoc home"><Brand compact /></Link>
             <div className="hidden items-center gap-2 border-l border-black/[0.08] pl-4 text-[11px] font-semibold text-[#8a8a8a] sm:flex">
@@ -217,14 +216,12 @@ export default function OcrWorkspace() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <Badge
-              variant="outline"
-              className="hidden h-8 gap-1.5 rounded-full border-[#36aef5]/20 bg-[#edf8ff] px-3 text-[11px] font-semibold text-[#168ccd] lg:flex"
-            >
+            <span className="hidden items-center gap-1.5 text-[10px] font-medium text-[#587080] lg:flex">
               <LockKeyhole className="size-3.5" />
-              Processed in your browser
-            </Badge>
-            <Link href="/" className="hidden h-8 items-center gap-1.5 rounded-lg px-2.5 text-[11px] font-semibold text-[#666] transition hover:bg-black/[0.04] hover:text-black sm:inline-flex">
+              Browser processing
+            </span>
+            <span className="hidden h-4 w-px bg-black/[0.1] lg:block" />
+            <Link href="/" className="hidden h-8 items-center gap-1.5 px-2.5 text-[11px] font-medium text-[#666] transition hover:text-black sm:inline-flex">
               <House className="size-3.5" /> Home
             </Link>
             <Button
@@ -236,39 +233,34 @@ export default function OcrWorkspace() {
               <RotateCcw className="size-3.5" />
               Sample
             </Button>
-            <Link href="/login" aria-label="Sign out" className="grid size-8 place-items-center rounded-lg text-[#777] transition hover:bg-black/[0.05] hover:text-black">
+            <Link href="/login" aria-label="Sign out" className="grid size-8 place-items-center text-[#777] transition hover:text-black">
               <LogOut className="size-3.5" />
             </Link>
           </div>
         </div>
       </header>
 
-      <section className="mx-auto max-w-[1480px] px-5 py-8 lg:px-8 lg:py-10">
-        <div className="mb-8 flex flex-col justify-between gap-5 xl:flex-row xl:items-end">
+      <section className="mx-auto max-w-[1480px] px-5 py-7 lg:px-8 lg:py-8">
+        <div className="mb-6 flex flex-col justify-between gap-5 xl:flex-row xl:items-end">
           <div className="max-w-3xl">
-            <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-[#168ccd]">
-              <Sparkles className="size-4" />
-              OCR workspace
-            </div>
-            <h1 className="font-heading text-3xl font-bold tracking-[-0.04em] sm:text-4xl lg:text-[46px] lg:leading-[1.08]">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-[#777]">Document 01</p>
+            <h1 className="mt-2 font-heading text-[30px] font-medium tracking-[-0.045em] sm:text-[34px]">
               Invoice extraction
-              <span className="text-muted-foreground"> workspace.</span>
             </h1>
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
-              Upload an invoice, review the extracted fields, and export
-              structured data without copying a single line by hand.
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+              Compare the source with the detected fields, then export the approved record.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-5 rounded-2xl border border-border bg-card px-5 py-3.5 shadow-sm">
+          <div className="flex flex-wrap items-center gap-5 border-t border-black/[0.1] pt-3 xl:border-t-0 xl:pt-0">
             <Metric label="Fields found" value={String(foundFields)} />
-            <div className="h-8 w-px bg-border" />
+            <div className="h-7 w-px bg-black/[0.1]" />
             <Metric
               label="Avg. confidence"
               value={`${invoice.confidence.toFixed(1)}%`}
               accent
             />
-            <div className="h-8 w-px bg-border" />
+            <div className="h-7 w-px bg-black/[0.1]" />
             <Metric
               label="Processing"
               value={`${(invoice.processingMs / 1000).toFixed(1)}s`}
@@ -276,23 +268,23 @@ export default function OcrWorkspace() {
           </div>
         </div>
 
-        <div className="grid gap-5 xl:grid-cols-[minmax(0,0.92fr)_minmax(560px,1.08fr)]">
-          <section className="overflow-hidden rounded-[24px] border border-black/[0.08] bg-card shadow-[0_20px_60px_rgba(12,37,53,0.07)]">
-            <div className="flex items-center justify-between border-b border-border px-5 py-4 sm:px-6">
+        <div className="grid gap-4 xl:grid-cols-[minmax(0,0.92fr)_minmax(560px,1.08fr)]">
+          <section className="overflow-hidden rounded-[14px] border border-black/[0.1] bg-card">
+            <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
               <div>
-                <p className="font-heading text-sm font-bold">
+                <p className="font-heading text-sm font-medium">
                   Source document
                 </p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
                   PDF, PNG or JPG up to 10 MB
                 </p>
               </div>
-              <Badge className="rounded-full bg-accent px-3 text-[11px] font-bold text-accent-foreground hover:bg-accent">
+              <Badge variant="outline" className="rounded-[6px] px-2.5 text-[10px] font-medium text-[#666]">
                 Page 1 of {pageCount}
               </Badge>
             </div>
 
-            <div className="bg-[#edf2f5] p-4 sm:p-6">
+            <div className="bg-[#e9ebeb] p-4 sm:p-5">
               <button
                 type="button"
                 onClick={() => inputRef.current?.click()}
@@ -302,14 +294,14 @@ export default function OcrWorkspace() {
                   void handleFile(event.dataTransfer.files[0]);
                 }}
                 disabled={status === 'processing'}
-                className="group relative mb-4 flex w-full items-center justify-between rounded-2xl border border-dashed border-[#36aef5]/40 bg-white/80 px-4 py-3 text-left transition hover:border-[#36aef5] hover:bg-white focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/30 disabled:cursor-wait disabled:opacity-70"
+                className="group relative mb-4 flex w-full items-center justify-between rounded-[9px] border border-dashed border-black/20 bg-white/85 px-4 py-3 text-left transition hover:border-[#159fe9] hover:bg-white focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/20 disabled:cursor-wait disabled:opacity-70"
               >
                 <span className="flex min-w-0 items-center gap-3">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+                  <span className="grid size-8 shrink-0 place-items-center border border-black/[0.08] bg-white text-primary">
                     <UploadCloud className="size-4.5" />
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-xs font-bold">
+                    <span className="block text-xs font-medium">
                       Drop a document or browse
                     </span>
                     <span className="mt-0.5 block max-w-[280px] truncate text-[11px] text-muted-foreground">
@@ -317,7 +309,7 @@ export default function OcrWorkspace() {
                     </span>
                   </span>
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-primary">
+                <span className="text-[10px] font-medium text-primary">
                   Choose file
                 </span>
               </button>
@@ -332,7 +324,7 @@ export default function OcrWorkspace() {
               {status === 'processing' && (
                 <Progress
                   value={progress}
-                  className="mb-4 rounded-xl border border-primary/10 bg-white/80 p-3"
+                  className="mb-4 rounded-[8px] border border-primary/10 bg-white/80 p-3"
                 >
                   <ProgressLabel className="text-xs">
                     {progressLabel}
@@ -346,7 +338,7 @@ export default function OcrWorkspace() {
               {error && (
                 <div
                   role="alert"
-                  className="mb-4 flex items-start gap-2 rounded-xl border border-destructive/20 bg-white p-3 text-xs text-destructive"
+                  className="mb-4 flex items-start gap-2 rounded-[8px] border border-destructive/20 bg-white p-3 text-xs text-destructive"
                 >
                   <AlertCircle className="mt-0.5 size-4 shrink-0" />
                   <span>{error}</span>
@@ -354,7 +346,7 @@ export default function OcrWorkspace() {
               )}
 
               {previewUrl ? (
-                <div className="mx-auto flex min-h-[540px] max-w-[500px] items-center justify-center overflow-hidden rounded-[18px] bg-white p-4 shadow-[0_18px_42px_rgba(21,52,43,0.14)]">
+                <div className="mx-auto flex min-h-[540px] max-w-[500px] items-center justify-center overflow-hidden rounded-[6px] bg-white p-4 shadow-[0_14px_34px_rgba(0,0,0,0.1)]">
                   {/* Uploaded files are local object/data URLs selected by the user. */}
                   <img
                     src={previewUrl}
@@ -368,10 +360,10 @@ export default function OcrWorkspace() {
             </div>
           </section>
 
-          <section className="overflow-hidden rounded-[24px] border border-black/[0.08] bg-card shadow-[0_20px_60px_rgba(12,37,53,0.07)]">
-            <div className="flex flex-col gap-4 border-b border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <section className="overflow-hidden rounded-[14px] border border-black/[0.1] bg-card">
+            <div className="flex flex-col gap-4 border-b border-border px-5 py-3.5 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-3">
-                <div className="grid size-9 place-items-center rounded-xl bg-primary/10 text-primary">
+                <div className="text-primary">
                   {status === 'processing' ? (
                     <FileSearch className="size-4.5 animate-pulse" />
                   ) : status === 'error' ? (
@@ -381,7 +373,7 @@ export default function OcrWorkspace() {
                   )}
                 </div>
                 <div>
-                  <p className="font-heading text-sm font-bold">
+                  <p className="font-heading text-sm font-medium">
                     {status === 'processing'
                       ? progressLabel
                       : status === 'error'
@@ -400,7 +392,7 @@ export default function OcrWorkspace() {
                   onChange={(event) =>
                     setExportFormat(event.target.value as ExportFormat)
                   }
-                  className="h-9 rounded-xl border border-border bg-background px-3 text-xs font-bold outline-none focus:ring-3 focus:ring-ring/30"
+                  className="h-9 rounded-[7px] border border-border bg-background px-3 text-xs font-medium outline-none focus:ring-3 focus:ring-ring/20"
                 >
                   <option value="json">JSON</option>
                   <option value="csv">CSV</option>
@@ -408,7 +400,7 @@ export default function OcrWorkspace() {
                 </select>
                 <Button
                   size="sm"
-                  className="h-9 rounded-xl px-3 shadow-[0_8px_20px_rgba(21,92,75,0.18)]"
+                  className="h-9 rounded-[7px] px-3 shadow-none"
                   disabled={status !== 'ready'}
                   onClick={() => void exportInvoice()}
                 >
@@ -417,19 +409,19 @@ export default function OcrWorkspace() {
               </div>
             </div>
 
-            <div className="px-5 pt-5 sm:px-6">
-              <div className="grid grid-cols-2 rounded-xl bg-muted p-1">
+            <div className="px-5 pt-5">
+              <div className="flex gap-6 border-b border-black/[0.08]">
                 <button
                   type="button"
                   onClick={() => setActiveView('fields')}
-                  className={`rounded-lg px-3 py-2 text-xs font-bold transition ${activeView === 'fields' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground'}`}
+                  className={`border-b-2 px-0 pb-2.5 text-xs font-medium transition ${activeView === 'fields' ? 'border-[#159fe9] text-foreground' : 'border-transparent text-muted-foreground'}`}
                 >
                   Extracted data
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveView('raw')}
-                  className={`rounded-lg px-3 py-2 text-xs font-bold transition ${activeView === 'raw' ? 'bg-card text-foreground shadow-sm' : 'text-muted-foreground'}`}
+                  className={`border-b-2 px-0 pb-2.5 text-xs font-medium transition ${activeView === 'raw' ? 'border-[#159fe9] text-foreground' : 'border-transparent text-muted-foreground'}`}
                 >
                   Raw OCR text
                 </button>
@@ -437,27 +429,27 @@ export default function OcrWorkspace() {
             </div>
 
             {activeView === 'raw' ? (
-              <div className="p-5 sm:p-6">
+              <div className="p-5">
                 <div className="mb-3 flex items-center justify-between">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.13em] text-muted-foreground">
                     Recognized text
                   </p>
-                  <Badge variant="secondary" className="rounded-full">
+                  <Badge variant="secondary" className="rounded-[5px] text-[10px] font-medium">
                     {invoice.rawText.split(/\s+/).filter(Boolean).length} words
                   </Badge>
                 </div>
-                <pre className="min-h-[550px] overflow-auto whitespace-pre-wrap rounded-2xl border border-border bg-[#111827] p-5 font-mono text-xs leading-6 text-[#dbeafe]">
+                <pre className="min-h-[550px] overflow-auto whitespace-pre-wrap rounded-[8px] border border-border bg-[#151515] p-5 font-mono text-xs leading-6 text-[#d8e5ec]">
                   {invoice.rawText || 'No text was recognized.'}
                 </pre>
               </div>
             ) : (
-              <div className="p-5 sm:p-6">
+              <div className="p-5">
                 <div className="mb-5 flex items-center justify-between">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.13em] text-muted-foreground">
                     Document fields
                   </p>
-                  <p className="text-xs font-semibold text-primary">
-                    Editable results
+                  <p className="text-[10px] font-medium text-primary">
+                    Click a field to edit
                   </p>
                 </div>
 
@@ -465,20 +457,17 @@ export default function OcrWorkspace() {
                   {textFields.map((field) => (
                     <label
                       key={field.key}
-                      className="rounded-2xl border border-border bg-background p-3.5 transition focus-within:border-primary/40 focus-within:ring-3 focus-within:ring-primary/10"
+                      className="rounded-[8px] border border-border bg-[#fafafa] p-3.5 transition focus-within:border-primary/45 focus-within:bg-white focus-within:ring-3 focus-within:ring-primary/8"
                     >
-                      <span className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                      <span className="text-[9px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
                         {field.label}
-                        <span className="rounded-full bg-primary/8 px-2 py-0.5 text-[9px] text-primary">
-                          {Math.round(invoice.confidence)}%
-                        </span>
                       </span>
                       <input
                         value={invoice[field.key]}
                         onChange={(event) =>
                           updateTextField(field.key, event.target.value)
                         }
-                        className="mt-2 w-full bg-transparent text-sm font-semibold outline-none"
+                        className="mt-2 w-full bg-transparent text-sm font-medium outline-none"
                       />
                     </label>
                   ))}
@@ -486,12 +475,12 @@ export default function OcrWorkspace() {
 
                 <div className="mt-6">
                   <div className="mb-3 flex items-center justify-between">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                    <p className="text-[10px] font-medium uppercase tracking-[0.13em] text-muted-foreground">
                       Line items
                     </p>
                     <button
                       type="button"
-                      className="text-xs font-bold text-primary hover:underline"
+                      className="text-xs font-medium text-primary hover:underline"
                       onClick={() =>
                         setInvoice((current) => ({
                           ...current,
@@ -505,8 +494,8 @@ export default function OcrWorkspace() {
                       + Add row
                     </button>
                   </div>
-                  <div className="overflow-hidden rounded-2xl border border-border">
-                    <div className="grid grid-cols-[1fr_52px_92px] bg-muted/65 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                  <div className="overflow-hidden rounded-[8px] border border-border">
+                    <div className="grid grid-cols-[1fr_52px_92px] bg-[#f5f5f3] px-4 py-2.5 text-[9px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
                       <span>Description</span>
                       <span>Qty</span>
                       <span className="text-right">Total</span>
@@ -538,23 +527,22 @@ export default function OcrWorkspace() {
                 </div>
 
                 <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_220px]">
-                  <div className="flex items-start gap-3 rounded-2xl bg-accent/70 p-4 text-accent-foreground">
+                  <div className="flex items-start gap-3 rounded-[8px] border border-black/[0.08] bg-[#f7f7f5] p-4 text-[#555]">
                     <FileText className="mt-0.5 size-4 shrink-0" />
                     <div>
-                      <p className="text-xs font-bold">
-                        Ready for your workflow
+                      <p className="text-xs font-medium text-[#222]">
+                        Record ready for export
                       </p>
                       <p className="mt-1 text-[11px] leading-4 opacity-70">
-                        Edit any value, then export clean data for accounting or
-                        automation.
+                        Review any value that needs attention, then choose an output format above.
                       </p>
                     </div>
                   </div>
-                  <div className="rounded-2xl bg-[#111827] p-4 text-white">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/55">
+                  <div className="rounded-[8px] bg-[#151515] p-4 text-white">
+                    <p className="text-[9px] font-medium uppercase tracking-[0.14em] text-white/45">
                       Total due
                     </p>
-                    <p className="mt-1.5 font-heading text-2xl font-black tracking-[-0.03em]">
+                    <p className="mt-1.5 font-heading text-2xl font-medium tracking-[-0.03em]">
                       {formatMoney(invoice.total, invoice.currency)}
                     </p>
                     <p className="mt-1 text-[10px] text-white/55">
@@ -587,11 +575,11 @@ function Metric({
 }) {
   return (
     <div>
-      <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
+      <p className="text-[9px] font-medium uppercase tracking-[0.13em] text-muted-foreground">
         {label}
       </p>
       <p
-        className={`mt-1 font-heading text-xl font-bold ${accent ? 'text-primary' : ''}`}
+        className={`mt-1 font-heading text-base font-medium ${accent ? 'text-primary' : ''}`}
       >
         {value}
       </p>
@@ -601,7 +589,7 @@ function Metric({
 
 function SampleDocument({ invoice }: { invoice: InvoiceData }) {
   return (
-    <div className="mx-auto max-w-[460px] rounded-[18px] bg-white p-7 shadow-[0_18px_42px_rgba(21,52,43,0.14)] sm:p-9">
+    <div className="mx-auto max-w-[460px] rounded-[6px] bg-white p-7 shadow-[0_14px_34px_rgba(0,0,0,0.1)] sm:p-9">
       <div className="flex items-start justify-between border-b border-[#dfe5e2] pb-7">
         <div>
           <div className="mb-2 h-2.5 w-28 rounded-full bg-[#111827]" />
@@ -610,7 +598,7 @@ function SampleDocument({ invoice }: { invoice: InvoiceData }) {
           </p>
         </div>
         <div className="text-right">
-          <p className="font-heading text-2xl font-black tracking-[-0.04em] text-[#111827]">
+          <p className="font-heading text-2xl font-semibold tracking-[-0.04em] text-[#111827]">
             INVOICE
           </p>
           <p className="mt-1 text-[9px] font-semibold text-[#759089]">
@@ -669,7 +657,7 @@ function SampleDocument({ invoice }: { invoice: InvoiceData }) {
           <span>Tax</span>
           <span>{formatMoney(invoice.tax, invoice.currency)}</span>
         </div>
-        <div className="flex justify-between border-t border-[#dfe5e8] pt-2.5 font-heading text-sm font-black text-[#111827]">
+        <div className="flex justify-between border-t border-[#dfe5e8] pt-2.5 font-heading text-sm font-semibold text-[#111827]">
           <span>Total</span>
           <span>{formatMoney(invoice.total, invoice.currency)}</span>
         </div>

@@ -3,18 +3,15 @@
 import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  Eye,
-  EyeOff,
-  LockKeyhole,
-  ScanLine,
-  ShieldCheck,
-} from 'lucide-react';
+import { ArrowLeft, ArrowRight, Eye, EyeOff, LockKeyhole } from 'lucide-react';
 
 import { Brand } from '@/components/brand';
+
+const steps = [
+  ['01', 'Upload', 'Select a PDF or image invoice.'],
+  ['02', 'Review', 'Compare detected values with the source.'],
+  ['03', 'Export', 'Download JSON, CSV or Excel.'],
+];
 
 export default function LoginPage() {
   const router = useRouter();
@@ -25,16 +22,14 @@ export default function LoginPage() {
 
   function enterWorkspace(mode: 'account' | 'guest') {
     sessionStorage.setItem('lumendoc-demo-session', mode);
-    if (mode === 'account') {
-      sessionStorage.setItem('lumendoc-demo-email', email);
-    }
+    if (mode === 'account') sessionStorage.setItem('lumendoc-demo-email', email);
     router.push('/app');
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!email.includes('@') || password.length < 6) {
-      setError('Enter a valid email and at least 6 characters for the demo password.');
+      setError('Enter a valid email and at least six password characters.');
       return;
     }
     setError('');
@@ -42,117 +37,94 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#f6f7f8] text-[#111]">
-      <div className="grid min-h-screen lg:grid-cols-[0.9fr_1.1fr]">
-        <section className="relative hidden overflow-hidden bg-[#111] p-10 text-white lg:flex lg:flex-col xl:p-14">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.07)_1px,transparent_1px)] bg-[size:86px_86px] [mask-image:linear-gradient(135deg,black,transparent_90%)]" />
-          <Link href="/" className="relative z-10 inline-flex w-fit items-center gap-2.5 text-white">
-            <span className="grid size-8 place-items-center rounded-[10px] bg-[#36aef5] text-white">
-              <ScanLine className="size-4.5" />
-            </span>
-            <span className="text-[15px] font-bold tracking-[-0.025em]">LumenDoc AI</span>
-          </Link>
-
-          <div className="relative z-10 my-auto max-w-[520px]">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.07] px-3 py-1.5 text-[11px] font-bold text-white/70">
-              <ShieldCheck className="size-3.5 text-[#5ac5ff]" />
-              Secure demo workspace
-            </span>
-            <h1 className="mt-7 font-heading text-[52px] font-semibold leading-[0.98] tracking-[-0.06em] xl:text-[64px]">
-              Documents in.
-              <br />
-              Clean data out.
-            </h1>
-            <p className="mt-6 max-w-md text-[15px] leading-7 text-white/55">
-              Experience the complete invoice extraction workflow—from upload and OCR to review and structured export.
-            </p>
-            <div className="mt-10 space-y-4">
-              {[
-                'PDF, PNG and JPG invoice processing',
-                'Editable fields and line-item detection',
-                'JSON, CSV and Excel export',
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-3 text-sm text-white/70">
-                  <span className="grid size-6 place-items-center rounded-full bg-[#36aef5]/15 text-[#5bc5ff]">
-                    <Check className="size-3.5" />
-                  </span>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <p className="relative z-10 text-[11px] text-white/35">Private browser processing · No document retention</p>
-        </section>
-
-        <section className="flex min-h-screen flex-col bg-white">
-          <div className="flex h-[68px] items-center justify-between border-b border-black/[0.07] px-5 sm:px-8 lg:justify-end">
-            <Link href="/" className="lg:hidden"><Brand /></Link>
-            <Link href="/" className="inline-flex items-center gap-2 text-xs font-semibold text-[#666] transition hover:text-black">
-              <ArrowLeft className="size-3.5" /> Back to home
+    <main className="min-h-screen bg-[#f8f8f6] text-[#121212]">
+      <div className="grid min-h-screen lg:grid-cols-[minmax(520px,0.85fr)_1.15fr]">
+        <section className="flex min-h-screen flex-col border-r border-black/[0.1] px-5 sm:px-10 lg:px-14 xl:px-20">
+          <header className="flex h-20 items-center justify-between">
+            <Link href="/" aria-label="LumenDoc home"><Brand /></Link>
+            <Link href="/" className="inline-flex items-center gap-2 text-xs text-[#666] transition hover:text-black">
+              <ArrowLeft className="size-3.5" /> Home
             </Link>
-          </div>
+          </header>
 
-          <div className="flex flex-1 items-center justify-center px-5 py-12 sm:px-8">
-            <div className="w-full max-w-[420px]">
-              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#168ccd]">Welcome to LumenDoc</p>
-              <h2 className="mt-3 font-heading text-[36px] font-semibold tracking-[-0.05em]">Enter the workspace.</h2>
-              <p className="mt-3 text-sm leading-6 text-[#747474]">Use the prefilled portfolio credentials or continue directly as a guest.</p>
+          <div className="my-auto w-full max-w-[410px] py-12">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#777]">Portfolio demonstration</p>
+            <h1 className="mt-4 font-heading text-[38px] font-medium tracking-[-0.05em]">Access LumenDoc</h1>
+            <p className="mt-3 text-sm leading-6 text-[#696969]">
+              Use the prefilled demo account, or enter as a guest. Both paths open the same invoice workspace.
+            </p>
 
-              <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
-                <label className="block">
-                  <span className="mb-2 block text-xs font-semibold text-[#333]">Email address</span>
+            <form onSubmit={handleSubmit} className="mt-9">
+              <label className="block">
+                <span className="mb-2 block text-xs font-medium text-[#3c3c3c]">Email</span>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  autoComplete="email"
+                  className="h-12 w-full rounded-[9px] border border-black/[0.14] bg-white px-3.5 text-sm outline-none transition focus:border-[#159fe9] focus:ring-3 focus:ring-[#159fe9]/10"
+                />
+              </label>
+
+              <label className="mt-4 block">
+                <span className="mb-2 block text-xs font-medium text-[#3c3c3c]">Password</span>
+                <span className="relative block">
                   <input
-                    type="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    autoComplete="email"
-                    className="h-12 w-full rounded-xl border border-black/10 bg-[#fafafa] px-4 text-sm outline-none transition placeholder:text-[#aaa] focus:border-[#36aef5] focus:bg-white focus:ring-4 focus:ring-[#36aef5]/10"
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    autoComplete="current-password"
+                    className="h-12 w-full rounded-[9px] border border-black/[0.14] bg-white px-3.5 pr-12 text-sm outline-none transition focus:border-[#159fe9] focus:ring-3 focus:ring-[#159fe9]/10"
                   />
-                </label>
-                <label className="block">
-                  <span className="mb-2 block text-xs font-semibold text-[#333]">Password</span>
-                  <span className="relative block">
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                      autoComplete="current-password"
-                      className="h-12 w-full rounded-xl border border-black/10 bg-[#fafafa] px-4 pr-12 text-sm outline-none transition focus:border-[#36aef5] focus:bg-white focus:ring-4 focus:ring-[#36aef5]/10"
-                    />
-                    <button
-                      type="button"
-                      aria-label={showPassword ? 'Hide password' : 'Show password'}
-                      onClick={() => setShowPassword((current) => !current)}
-                      className="absolute right-3 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-lg text-[#888] transition hover:bg-black/[0.05] hover:text-black"
-                    >
-                      {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                    </button>
-                  </span>
-                </label>
+                  <button type="button" aria-label={showPassword ? 'Hide password' : 'Show password'} onClick={() => setShowPassword((value) => !value)} className="absolute right-2 top-1/2 grid size-8 -translate-y-1/2 place-items-center text-[#777] transition hover:text-black">
+                    {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                  </button>
+                </span>
+              </label>
 
-                {error && <p role="alert" className="rounded-xl bg-red-50 px-3 py-2 text-xs text-red-700">{error}</p>}
+              {error && <p role="alert" className="mt-3 border-l-2 border-red-500 pl-3 text-xs leading-5 text-red-700">{error}</p>}
 
-                <button type="submit" className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#111] text-sm font-semibold text-white shadow-[0_12px_30px_rgba(0,0,0,0.13)] transition hover:-translate-y-0.5 hover:bg-[#242424]">
-                  Sign in to demo <ArrowRight className="size-4" />
-                </button>
-              </form>
-
-              <div className="my-6 flex items-center gap-4 text-[10px] font-bold uppercase tracking-[0.15em] text-[#aaa]">
-                <span className="h-px flex-1 bg-black/[0.08]" /> or <span className="h-px flex-1 bg-black/[0.08]" />
-              </div>
-
-              <button onClick={() => enterWorkspace('guest')} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-black/10 bg-white text-sm font-semibold text-[#333] transition hover:border-black/20 hover:bg-[#fafafa]">
-                Continue as guest <ArrowRight className="size-4" />
+              <button type="submit" className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[9px] bg-[#151515] text-sm font-medium text-white transition hover:bg-black">
+                Continue <ArrowRight className="size-4" />
               </button>
+            </form>
 
-              <div className="mt-6 flex items-start gap-2.5 rounded-xl bg-[#f1f9fe] p-3.5 text-[11px] leading-5 text-[#4a6c7e]">
-                <LockKeyhole className="mt-0.5 size-3.5 shrink-0 text-[#168ccd]" />
-                <p>This is a portfolio demo. The password is never transmitted or stored, and your uploaded documents remain in your browser.</p>
-              </div>
+            <div className="my-6 flex items-center gap-3 text-[9px] uppercase tracking-[0.14em] text-[#999]"><span className="h-px flex-1 bg-black/[0.1]" />or<span className="h-px flex-1 bg-black/[0.1]" /></div>
+
+            <button type="button" onClick={() => enterWorkspace('guest')} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-[9px] border border-black/[0.14] bg-transparent text-sm font-medium transition hover:border-black/30 hover:bg-white">
+              Continue as guest <ArrowRight className="size-4" />
+            </button>
+
+            <div className="mt-7 flex items-start gap-3 border-t border-black/[0.1] pt-5 text-[11px] leading-5 text-[#767676]">
+              <LockKeyhole className="mt-0.5 size-3.5 shrink-0 text-[#159fe9]" />
+              <p>This screen demonstrates an access flow; it is not a production identity system. Passwords and documents are not transmitted.</p>
             </div>
           </div>
+
+          <footer className="pb-8 text-[10px] text-[#999]">LumenDoc · Invoice OCR demonstration</footer>
         </section>
+
+        <aside className="relative hidden overflow-hidden bg-[#121212] text-white lg:flex lg:flex-col lg:justify-between lg:p-14 xl:p-20">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.055)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(145deg,black,transparent_86%)]" />
+          <div className="relative z-10">
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">A three-step workflow</p>
+            <h2 className="mt-5 max-w-xl font-heading text-[46px] font-medium leading-[1.04] tracking-[-0.055em] xl:text-[58px]">
+              From document to structured record.
+            </h2>
+          </div>
+
+          <div className="relative z-10 mt-16 border-t border-white/[0.14]">
+            {steps.map(([number, title, copy]) => (
+              <div key={number} className="grid grid-cols-[48px_120px_1fr] border-b border-white/[0.14] py-5">
+                <span className="font-mono text-[10px] text-[#44bcfb]">{number}</span>
+                <span className="text-sm font-medium text-white/88">{title}</span>
+                <span className="text-xs leading-5 text-white/42">{copy}</span>
+              </div>
+            ))}
+          </div>
+
+          <p className="relative z-10 mt-16 max-w-md text-xs leading-5 text-white/35">The included sample contains synthetic data and can be reset at any time.</p>
+        </aside>
       </div>
     </main>
   );

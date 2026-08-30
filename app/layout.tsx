@@ -16,14 +16,14 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     'https://lumendoc-invoice-ocr.md-ashraful-kabir-al.chatgpt.site',
   ),
-  title: 'LumenDoc - Invoice OCR and Data Extraction',
+  title: 'LumenDoc — Invoice data extraction',
   description:
-    'Extract invoice fields and line items into clean, editable data with privacy-first OCR.',
+    'Extract invoice fields and line items, review every value, and export structured JSON, CSV, or Excel data.',
   icons: {
     icon: '/favicon.svg',
   },
   openGraph: {
-    title: 'LumenDoc - Invoice OCR and Data Extraction',
+    title: 'LumenDoc — Invoice data extraction',
     description:
       'Turn invoices into editable structured data and export JSON, CSV, or Excel files.',
     images: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LumenDoc - Invoice OCR and Data Extraction',
+    title: 'LumenDoc — Invoice data extraction',
     description:
       'Turn invoices into editable structured data and export JSON, CSV, or Excel files.',
     images: ['/og.png'],
