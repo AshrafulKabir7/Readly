@@ -13,7 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://lumendoc-invoice-ocr.openai.site'),
+  metadataBase: new URL(
+    'https://lumendoc-invoice-ocr.md-ashraful-kabir-al.chatgpt.site',
+  ),
   title: 'LumenDoc - Invoice OCR and Data Extraction',
   description:
     'Extract invoice fields and line items into clean, editable data with privacy-first OCR.',
