@@ -2,7 +2,7 @@
 
 ## 0–5 seconds
 
-Show the LumenDoc homepage hero, product preview, and feature cards.
+Show the Readly homepage hero, product preview, and feature cards.
 
 Voiceover: "Still copying invoice data by hand? I build complete OCR web applications that turn documents into structured data."
 

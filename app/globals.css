@@ -41,18 +41,18 @@
   --card-foreground: oklch(0.18 0.005 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.005 260);
-  --primary: oklch(0.7 0.15 234);
+  --primary: oklch(0.62 0.21 276);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.96 0.012 238);
   --secondary-foreground: oklch(0.28 0.035 239);
   --muted: oklch(0.965 0.004 240);
   --muted-foreground: oklch(0.53 0.01 250);
-  --accent: oklch(0.95 0.035 231);
-  --accent-foreground: oklch(0.42 0.105 237);
+  --accent: oklch(0.95 0.035 276);
+  --accent-foreground: oklch(0.42 0.14 276);
   --destructive: oklch(0.58 0.21 27);
   --border: oklch(0.91 0.006 240);
   --input: oklch(0.91 0.006 240);
-  --ring: oklch(0.7 0.15 234);
+  --ring: oklch(0.62 0.21 276);
   --radius: 0.75rem;
 }
 
@@ -83,12 +83,14 @@
   }
 
   html {
-    @apply font-sans;
     scroll-behavior: smooth;
   }
 
+  /* The Geist font variables are set on <body>, so the font family must be
+     applied there too; on <html> the variable is undefined and browsers fall
+     back to a serif default. */
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-sans text-foreground;
   }
 
   button,
@@ -102,15 +104,33 @@
 }
 
 @keyframes hero-scan {
-  0%, 8% { top: 18%; opacity: 0; }
-  15% { opacity: 1; }
-  78% { top: 82%; opacity: 1; }
-  88%, 100% { top: 82%; opacity: 0; }
+  0%,
+  8% {
+    top: 18%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  78% {
+    top: 82%;
+    opacity: 1;
+  }
+  88%,
+  100% {
+    top: 82%;
+    opacity: 0;
+  }
 }
 
 @keyframes hero-float {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -7px; }
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -7px;
+  }
 }
 
 .hero-scan-line {

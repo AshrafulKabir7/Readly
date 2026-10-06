@@ -12,18 +12,21 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : 'http://localhost:3000';
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    'https://lumendoc-invoice-ocr.md-ashraful-kabir-al.chatgpt.site',
-  ),
-  title: 'LumenDoc — Invoice data extraction',
+  // Absolute URLs for social previews: Vercel's production domain when deployed there.
+  metadataBase: new URL(siteUrl),
+  title: 'Readly — Invoice data extraction',
   description:
     'Extract invoice fields and line items, review every value, and export structured JSON, CSV, or Excel data.',
   icons: {
     icon: '/favicon.svg',
   },
   openGraph: {
-    title: 'LumenDoc — Invoice data extraction',
+    title: 'Readly — Invoice data extraction',
     description:
       'Turn invoices into editable structured data and export JSON, CSV, or Excel files.',
     images: [
@@ -31,13 +34,13 @@ export const metadata: Metadata = {
         url: '/og.png',
         width: 1536,
         height: 1024,
-        alt: 'LumenDoc invoice OCR and data extraction',
+        alt: 'Readly invoice OCR and data extraction',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LumenDoc — Invoice data extraction',
+    title: 'Readly — Invoice data extraction',
     description:
       'Turn invoices into editable structured data and export JSON, CSV, or Excel files.',
     images: ['/og.png'],

@@ -11,7 +11,7 @@ export default function WorkspacePage() {
   const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
-    const session = sessionStorage.getItem('lumendoc-demo-session');
+    const session = sessionStorage.getItem('readly-demo-session');
     if (!session) {
       router.replace('/login');
       return;
